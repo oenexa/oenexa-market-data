@@ -1,0 +1,23 @@
+# ==============================================================================
+# OENEXA Real-Time Market Data Service — Standalone Stack
+# ==============================================================================
+
+version: "3.8"
+
+services:
+  oenexa-market-data:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oenexa-market-data-standalone
+    ports:
+      - "8085:8085"
+    environment:
+      PORT: "8085"
+      NODE_ENV: production
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:8085/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
