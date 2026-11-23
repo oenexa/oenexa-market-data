@@ -1,10 +1,13 @@
 import http from 'node:http';
 import { MarketDataService } from './service/MarketDataService.js';
+import { OracleAttestationService } from './service/OracleAttestationService.js';
 
 export * from './domain/types.js';
 export * from './service/MarketDataService.js';
+export * from './service/OracleAttestationService.js';
 
 const md = new MarketDataService();
+const oracle = new OracleAttestationService();
 const PORT = Number(process.env.PORT) || 8085;
 
 export const server = http.createServer((req, res) => {
